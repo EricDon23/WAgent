@@ -1,0 +1,28 @@
+{
+  "snapshot_id": "snap_4_121221",
+  "snapshot_type": "setting",
+  "data": {
+    "story_name": "《生成第二章：频密互动，女频文章，暧昧互动》",
+    "story_summary": "关于生成第二章：频密互动，女频文章，暧昧互动的故事",
+    "story_intro": "这是一个以生成第二章：频密互动，女频文章，暧昧互动为核心的故事...",
+    "theme": "探索与成长",
+    "characters": [
+      {
+        "name": "主角",
+        "role": "核心人物",
+        "personality": "勇敢",
+        "background": "普通"
+      }
+    ],
+    "relationships": "主要角色间的关系",
+    "plot_outline": "起因→发展→结局",
+    "constraints": "温暖基调，第三人称，1500-2500字/章",
+    "research_needs": [
+      "生成第二章：频密互动，女频文章，暧昧互动",
+      "相关背景",
+      "同类作品"
+    ]
+  },
+  "checksum": "ebfc0a1bceeeb0c7",
+  "timestamp": "2026-04-17T12:12:21.655625"
+}

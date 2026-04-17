@@ -1,0 +1,59 @@
+{
+  "sess_20260417_115021": {
+    "instance_id": "agent_503f2d1706db",
+    "session_id": "sess_20260417_115021",
+    "state": "running",
+    "created_at": "2026-04-17T11:50:47.418216",
+    "last_active_at": "2026-04-17T12:26:51.663030",
+    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_113208",
+    "current_chapter": 5,
+    "total_words_generated": 0,
+    "memory_usage_mb": 0.0,
+    "config": {
+      "session_id": "sess_20260417_115021",
+      "story_id": "",
+      "agent_type": "wagent",
+      "max_memory_mb": 512,
+      "auto_save_interval": 300,
+      "isolation_level": "strict"
+    }
+  },
+  "asdasd": {
+    "instance_id": "agent_5e4af20de22b",
+    "session_id": "asdasd",
+    "state": "running",
+    "created_at": "2026-04-17T11:58:38.339744",
+    "last_active_at": "2026-04-17T11:58:42.706407",
+    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_090942",
+    "current_chapter": 0,
+    "total_words_generated": 0,
+    "memory_usage_mb": 0.0,
+    "config": {
+      "session_id": "asdasd",
+      "story_id": "",
+      "agent_type": "wagent",
+      "max_memory_mb": 512,
+      "auto_save_interval": 300,
+      "isolation_level": "strict"
+    }
+  },
+  "123": {
+    "instance_id": "agent_d4b93e8240be",
+    "session_id": "123",
+    "state": "running",
+    "created_at": "2026-04-17T12:09:36.976690",
+    "last_active_at": "2026-04-17T12:09:40.069605",
+    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_090942",
+    "current_chapter": 0,
+    "total_words_generated": 0,
+    "memory_usage_mb": 0.0,
+    "config": {
+      "session_id": "123",
+      "story_id": "",
+      "agent_type": "wagent",
+      "max_memory_mb": 512,
+      "auto_save_interval": 300,
+      "isolation_level": "strict"
+    }
+  }
+}

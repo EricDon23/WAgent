@@ -51,22 +51,189 @@ try:
     from rich.console import Console as RichConsole
     from rich.panel import Panel
     from rich.markdown import Markdown
+    from rich.text import Text
     RICH_AVAILABLE = True
     console = RichConsole()
 except ImportError:
-    RichConsole = Panel = Markdown = None
+    RichConsole = Panel = Markdown = Text = None
     RICH_AVAILABLE = False
     console = None
 
 
+class InputPromptManager:
+    """
+    输入提示管理器 (v5.3+ 新增)
+    
+    核心功能：
+    - 视觉清晰的输入提示（与常规输出区分）
+    - 上下文特定的提示信息
+    - 输入格式/内容指导
+    - 防刷屏验证机制
+    """
+    
+    def __init__(self, console=None):
+        self.console = console or (RichConsole() if RICH_AVAILABLE else None)
+        self._input_active = False
+        self._last_prompt_context = ""
+    
+    def _format_prompt_header(self, context: str, instructions: str = None):
+        """格式化提示头部信息"""
+        if self.console and Text:
+            header = Text.assemble(
+                ("[INPUT] ", "bold yellow"),
+                (context, "cyan"),
+                style="white"
+            )
+            return header
+        else:
+            return f"[INPUT] {context}"
+    
+    def prompt(self, 
+              context: str, 
+              prompt_text: str, 
+              instructions: str = None, 
+              validation_func=None,
+              default: str = None) -> str:
+        """
+        显示带上下文的输入提示并获取用户输入
+        
+        Args:
+            context: 输入的上下文（如"会话选择"、"章节编号"等）
+            prompt_text: 具体的提示问题
+            instructions: 可选的格式/内容指导说明
+            validation_func: 可选的验证函数，返回True表示有效
+            default: 默认值（可选）
+        
+        Returns:
+            用户输入值（保证不为空，除非default为None）
+        
+        防刷屏机制：
+        - 在此方法执行期间，所有刷屏操作将被阻塞
+        """
+        self._input_active = True
+        self._last_prompt_context = context
+        
+        try:
+            # 显示上下文标题
+            if self.console:
+                from rich.panel import Panel
+                self.console.print()
+                panel = Panel(
+                    self._format_prompt_header(context),
+                    border_style="yellow",
+                    padding=(0, 1)
+                )
+                self.console.print(panel)
+            else:
+                print(f"\n{'='*60}")
+                print(f"[INPUT] {context}")
+                print(f"{'='*60}")
+            
+            # 显示格式指导（如果有）
+            if instructions:
+                if self.console:
+                    self.console.print(f"[dim]{instructions}[/dim]")
+                else:
+                    print(f"提示: {instructions}")
+            
+            # 显示提示并获取输入
+            full_prompt = f"\n{prompt_text}"
+            if default:
+                full_prompt += f" [{default}]"
+            full_prompt += ": "
+            
+            while True:
+                if self.console:
+                    from rich.prompt import Prompt as RichPrompt
+                    user_input = RichPrompt.ask(full_prompt, default=default)
+                else:
+                    user_input = input(full_prompt)
+                    
+                # 应用验证
+                if user_input is None and default is not None:
+                    user_input = default
+                    
+                if validation_func:
+                    if validation_func(user_input):
+                        break
+                    else:
+                        if self.console:
+                            self.console.print("[red]输入无效，请重试[/red]")
+                        else:
+                            print("输入无效，请重试")
+                else:
+                    break
+            
+            return user_input
+            
+        finally:
+            self._input_active = False
+    
+    def confirm(self, 
+               context: str, 
+               question: str, 
+               default: bool = False,
+               danger: bool = False) -> bool:
+        """
+        显示确认提示（带上下文）
+        
+        Args:
+            context: 上下文
+            question: 确认问题
+            default: 默认值
+            danger: 是否是危险操作（红色提示）
+        
+        Returns:
+            True/False
+        """
+        self._input_active = True
+        try:
+            if self.console:
+                from rich.prompt import Confirm as RichConfirm
+                from rich.panel import Panel
+                
+                border_style = "red" if danger else "yellow"
+                if Text:
+                    header = Text.assemble(
+                        ("[CONFIRM] ", "bold " + ("red" if danger else "yellow")),
+                        (context, "cyan"),
+                        style="white"
+                    )
+                else:
+                    header = f"[CONFIRM] {context}"
+                
+                self.console.print()
+                panel = Panel(header, border_style=border_style, padding=(0, 1))
+                self.console.print(panel)
+                
+                return RichConfirm.ask(question, default=default)
+            else:
+                print(f"\n[CONFIRM] {context}")
+                print("-" * 40)
+                while True:
+                    resp = input(f"{question} (y/n) [{ 'y' if default else 'n'}]: ").lower().strip()
+                    if resp in ['y', 'yes']:
+                        return True
+                    elif resp in ['n', 'no']:
+                        return False
+                    elif not resp:
+                        return default
+        finally:
+            self._input_active = False
+    
+    def is_waiting_for_input(self) -> bool:
+        """检查是否正在等待用户输入（防刷屏检查点）"""
+        return self._input_active
+
+
 class SmartDisplayController:
     """
-    智能显示控制器 (v5.3 新增)
+    智能显示控制器 (v5.3+ 增强版)
     
     核心功能：
     - 状态感知：区分"AI生成中"和"等待用户输入"
     - 智能刷新：仅在AI生成时触发界面更新
-    - 输入保护：用户输入时保持界面静止
+    - 输入保护：用户输入时保持界面静止（严格防刷屏）
     - 打断支持：支持优雅中断当前操作
     """
     
@@ -76,6 +243,7 @@ class SmartDisplayController:
         self._refresh_enabled = True
         self._interrupt_requested = False
         self._lock = threading.Lock()
+        self._input_prompt_mgr = InputPromptManager(self.console)
         
     def set_state(self, state: str):
         """设置当前状态"""
@@ -88,7 +256,7 @@ class SmartDisplayController:
     
     def is_waiting_input(self) -> bool:
         """检查是否在等待用户输入"""
-        return self._state == "waiting_input"
+        return self._state == "waiting_input" or self._input_prompt_mgr.is_waiting_for_input()
     
     def request_interrupt(self):
         """请求中断当前操作"""
@@ -103,17 +271,75 @@ class SmartDisplayController:
             return requested
     
     def should_refresh(self) -> bool:
-        """判断是否应该刷新界面（核心逻辑）"""
+        """
+        判断是否应该刷新界面（核心防刷屏逻辑）
+        
+        防刷屏规则：
+        - 正在等待用户输入时 → 绝对禁止刷新
+        - 只有AI生成时 → 允许刷新
+        """
         if not self._refresh_enabled:
             return False
+        
+        # 防刷屏：等待输入时绝对禁止刷新
+        if self.is_waiting_input():
+            return False
+            
         return self.is_generating()
     
     def print_status(self, message: str, style: str = "dim"):
-        """打印状态信息（线程安全）"""
+        """打印状态信息（线程安全，防刷屏）"""
+        if self.is_waiting_input():
+            # 等待输入时不打印状态（防刷屏）
+            return
+            
         if self.console:
             self.console.print(f"[{style}]{message}[/{style}]")
         else:
             print(message)
+    
+    def safe_input(self, context: str, prompt_text: str, 
+                  instructions: str = None, validation_func=None,
+                  default: str = None) -> str:
+        """
+        安全输入函数（完整防刷屏版本）
+        
+        这是程序中所有用户输入的唯一入口！
+        
+        关键特性：
+        1. 视觉上与常规输出明显区分
+        2. 提供上下文和格式指导
+        3. 严格防刷屏：输入期间完全阻塞所有刷新操作
+        4. 可选的验证逻辑
+        5. 默认值支持
+        """
+        self.set_state("waiting_input")
+        try:
+            return self._input_prompt_mgr.prompt(
+                context=context,
+                prompt_text=prompt_text,
+                instructions=instructions,
+                validation_func=validation_func,
+                default=default
+            )
+        finally:
+            self.set_state("idle")
+    
+    def safe_confirm(self, context: str, question: str,
+                    default: bool = False, danger: bool = False) -> bool:
+        """
+        安全确认函数（防刷屏版本）
+        """
+        self.set_state("waiting_input")
+        try:
+            return self._input_prompt_mgr.confirm(
+                context=context,
+                question=question,
+                default=default,
+                danger=danger
+            )
+        finally:
+            self.set_state("idle")
 
 
 class SessionSwitcher:
@@ -513,6 +739,267 @@ def interactive_session_switch(session_switcher: SessionSwitcher):
                 print("⚠️ 无效输入，请输入数字编号或 q 退出")
 
 
+def show_enterprise_session_list(mgr):
+    """
+    显示企业级会话列表（v2.0 增强版）
+    
+    包含完整的状态信息、隔离状态、安全令牌等
+    """
+    _console = RichConsole() if RICH_AVAILABLE else None
+    
+    status = mgr.get_system_status()
+    all_sessions = mgr.get_all_sessions(include_terminated=True)
+    
+    if _console:
+        from rich.table import Table
+        from rich.panel import Panel
+        
+        _console.print("\n" + "=" * 70)
+        _console.print("[bold cyan]🔐 企业级会话管理系统 v2.0[/bold cyan]")
+        _console.print("=" * 70)
+        
+        # 系统概览
+        overview = f"""
+[dim]系统概览:[/dim]
+  [green]●[/green] 活跃会话: {status['active_sessions']}
+  [yellow]●[/yellow] 空闲会话: {status['idle_sessions']}
+  [red]●[/red] 过期会话: {status['expired_sessions']}
+  [cyan]●[/cyan] 当前会话: {status.get('current_session_id', '无') or '无'}
+  [dim]监控: {'运行中' if status['monitor_running'] else '已停止'} | 自动清理: {'启用' if status['auto_cleanup_enabled'] else '禁用'}[/dim]
+"""
+        _console.print(Panel(overview, title="📊 系统状态"))
+        
+        # 会话列表表格
+        table = Table(show_header=True, title="📋 会话列表")
+        table.add_column("#", style="cyan", width=4)
+        table.add_column("会话ID", style="dim", width=22)
+        table.add_column("状态", width=10)
+        table.add_column("用户", width=12)
+        table.add_column("年龄", width=8)
+        table.add_column("空闲", width=8)
+        table.add_column("锁定", width=6)
+        table.add_column("数据大小", width=10)
+        
+        state_icons = {
+            'active': '[green]活跃[/green]',
+            'idle': '[yellow]空闲[/yellow]',
+            'suspended': '[blue]挂起[/blue]',
+            'expired': '[red]过期[/red]',
+            'terminated': '[dim]终止[/dim]',
+            'error': '[red]错误[/red]',
+            'created': '[dim]创建[/dim]'
+        }
+        
+        for i, session in enumerate(all_sessions[:20], 1):
+            state_icon = state_icons.get(session.state.value, str(session.state.value))
+            lock_icon = '🔒' if session.is_locked else '✓'
+            
+            age_min = int(session.age_seconds / 60)
+            idle_min = int(session.idle_seconds / 60)
+            data_kb = f"{(session.data_store.size_bytes / 1024):.1f}KB" if session.data_store else "N/A"
+            
+            user_id = session.metadata.user_id if session.metadata else "unknown"
+            
+            table.add_row(
+                str(i),
+                session.session_id[:20] + ("..." if len(session.session_id) > 20 else ""),
+                state_icon,
+                user_id[:10],
+                f"{age_min}m",
+                f"{idle_min}m",
+                lock_icon,
+                data_kb
+            )
+        
+        _console.print(table)
+        
+        if len(all_sessions) > 20:
+            _console.print(f"\n[dim]... 还有 {len(all_sessions)-20} 个会话未显示[/dim]")
+        
+    else:
+        print("\n" + "=" * 70)
+        print("🔐 企业级会话管理系统 v2.0")
+        print("=" * 70)
+        print(f"\n总会话: {len(all_sessions)} | 活跃: {status['active_sessions']} | 空闲: {status['idle_sessions']}")
+        
+        for i, session in enumerate(all_sessions[:15], 1):
+            print(f"  {i}. {session.session_id}")
+            print(f"     状态: {session.state.value} | 用户: {session.metadata.user_id or '?'}")
+
+
+def handle_runtime_session_command(command_str: str, mgr, wagent_instance=None):
+    """
+    处理运行时会话管理命令
+    
+    支持的命令：
+    - session list          - 列出所有会话
+    - session info          - 当前会话详情
+    - session switch <id>   - 切换到指定会话
+    - session new           - 创建新会话并切换
+    - session terminate <id>- 终止指定会话
+    - session status        - 系统状态概览
+    
+    Returns:
+        (是否处理了命令, 结果消息)
+    """
+    _console = RichConsole() if RICH_AVAILABLE else None
+    
+    parts = command_str.strip().split()
+    if not parts or parts[0].lower() != 'session':
+        return False, ""
+    
+    cmd = parts[1].lower() if len(parts) > 1 else ""
+    args = parts[2:] if len(parts) > 2 else []
+    
+    try:
+        if cmd == 'list' or cmd == 'ls':
+            show_enterprise_session_list(mgr)
+            return True, "已显示会话列表"
+        
+        elif cmd == 'info' or cmd == 'status':
+            current = mgr.get_current_session()
+            if current:
+                report = current.get_status_report()
+                
+                if _console:
+                    from rich.panel import Panel
+                    _console.print("\n[bold cyan]📊 当前会话详情[/bold cyan]")
+                    _console.print(Panel(
+                        f"""
+[dim]基本信息:[/dim]
+  [bold]会话ID:[/bold] {report['session_id']}
+  [bold]状态:[/bold] {report['state']}
+  [bold]有效:[/bold] {'✅ 是' if report['is_valid'] else '❌ 否'}
+  [bold]锁定:[/bold] {'🔒 是' if report['is_locked'] else '✓ 否'}
+
+[dim]时间信息:[/dim]
+  [bold]创建时间:[/bold] {report['created_at']}
+  [bold]最后访问:[/bold] {report['last_accessed_at']}
+  [bold]过期时间:[/bold] {report['expires_at']}
+  [bold]会话年龄:[/bold] {int(report['age_seconds'])}秒 ({int(report['age_seconds']/60)}分钟)
+  [bold]空闲时间:[/bold] {int(report['idle_seconds'])}秒 ({int(report['idle_seconds']/60)}分钟)
+
+[dim]数据与安全:[/dim]
+  [bold]数据大小:[/bold] {report['data_size_kb']} KB
+  [bold]数据完整性:[/bold] {'✅ 正常' if report['data_integrity_ok'] else '❌ 损坏'}
+  [bold]事件记录:[/bold] {report['events_count']} 条
+  [bold]令牌有效:[/bold] {'✅ 是' if report['token_valid'] else '❌ 否'}
+                        """,
+                        title=f"会话: {current.session_id[:16]}..."
+                    ))
+                else:
+                    print(f"\n当前会话: {current.session_id}")
+                    print(f"状态: {report['state']}")
+                    print(f"年龄: {int(report['age_seconds'])}秒 | 空闲: {int(report['idle_seconds'])}秒")
+                    
+                return True, f"当前会话: {current.session_id}"
+            else:
+                msg = "当前没有活跃的会话。使用 'session new' 创建新会话"
+                if _console:
+                    _console.print(f"[yellow]{msg}[/yellow]")
+                else:
+                    print(msg)
+                return True, msg
+        
+        elif cmd == 'switch' or cmd == 'sw':
+            if not args:
+                return False, "需要指定会话ID: session switch <session_id>"
+            
+            target_id = args[0]
+            success, error = mgr.switch_to(target_id)
+            
+            if success:
+                msg = f"✅ 已切换到会话: {target_id}"
+                if wagent_instance and hasattr(wagent_instance, '_enterprise_session_mgr'):
+                    wagent_instance._enterprise_session_mgr = mgr
+            else:
+                msg = f"❌ 切换失败: {error or '未知错误'}"
+            
+            if _console:
+                color = "green" if success else "red"
+                _console.print(f"[{color}]{msg}[/{color}]")
+            else:
+                print(msg)
+            
+            return True, msg
+        
+        elif cmd == 'new':
+            metadata = {}
+            if args:
+                metadata['name'] = ' '.join(args)
+            
+            new_session = mgr.switch_to_new(metadata=metadata)
+            msg = f"✅ 已创建并切换到新会话: {new_session.session_id}"
+            
+            if _console:
+                _console.print(f"[green]{msg}[/green]")
+            else:
+                print(msg)
+            
+            return True, msg
+        
+        elif cmd == 'terminate' or cmd == 'kill':
+            if not args:
+                return False, "需要指定会话ID: session terminate <session_id>"
+            
+            target_id = args[0]
+            success = mgr.terminate_session(target_id)
+            
+            if success:
+                msg = f"✅ 已终止会话: {target_id}"
+            else:
+                msg = f"❌ 终制失败: 会话不存在或已被终止"
+            
+            if _console:
+                color = "green" if success else "red"
+                _console.print(f"[{color}]{msg}[/{color}]")
+            else:
+                print(msg)
+            
+            return True, msg
+        
+        elif cmd == 'help' or cmd == '':
+            help_text = """
+[dim]会话管理命令帮助:[/dim]
+
+[cyan]session list[/cyan]         - 列出所有会话（含详细状态）
+[cyan]session info[/cyan]         - 显示当前会话详细信息
+[cyan]session switch <id>[/cyan]   - 切换到指定会话
+[cyan]session new [名称][/cyan]     - 创建新会话并自动切换
+[cyan]session terminate <id>[/cyan]- 终止指定会话
+[cyan]session status[/cyan]       - 系统状态概览
+
+[dim]示例:[/dim]
+  session switch sess_abc123
+  session new 我的新故事
+  session terminate sess_old001
+
+[dim]提示: 所有会话操作都会被记录审计日志[/dim]
+"""
+            if _console:
+                _console.print(help_text)
+            else:
+                print(help_text)
+            
+            return True, "已显示帮助"
+        
+        else:
+            msg = f"未知命令: session {cmd}。输入 'session help' 查看可用命令"
+            if _console:
+                _console.print(f"[red]{msg}[/red]")
+            else:
+                print(msg)
+            return True, msg
+            
+    except Exception as e:
+        error_msg = f"❌ 执行命令时出错: {str(e)}"
+        if _console:
+            _console.print(f"[red]{error_msg}[/red]")
+        else:
+            print(error_msg)
+        return True, error_msg
+
+
 def main():
     """
     主函数 (v5.3 升级版)
@@ -536,10 +1023,22 @@ def main():
   python wagent.py --list                # 列出所有已保存的故事
   python wagent.py --resume STORY_ID     # 恢复指定会话
   
+企业级会话管理 (v2.0):
+  python wagent.py --session-list        # 列出所有会话（含详细状态）
+  python wagent.py --session-info         # 显示当前会话详细信息
+
 高级选项:
   --no-refresh          禁用智能刷新
   --no-normalize        禁用文本规范化
   --refresh-interval N  自定义刷新间隔（秒）
+
+运行时会话命令 (在交互模式中输入):
+  session list          - 列出所有会话
+  session info          - 当前会话详情
+  session switch <id>   - 切换到指定会话
+  session new [名称]     - 创建新会话并切换
+  session terminate <id>- 终止指定会话
+  session help           - 会话命令帮助
 
 环境变量:
   WAGENT_REFRESH=true|false      启用/禁用刷新
@@ -566,6 +1065,10 @@ def main():
                        help='列出所有已保存的故事')
     parser.add_argument('--switch', '-s', action='store_true',
                        help='交互式会话切换模式')
+    parser.add_argument('--session-info', action='store_true',
+                       help='显示当前会话详细信息')
+    parser.add_argument('--session-list', action='store_true',
+                       help='列出所有会话（含状态）')
     
     args = parser.parse_args()
     start_time = datetime.now()
@@ -574,6 +1077,18 @@ def main():
     display_ctrl = SmartDisplayController()
     session_switcher = SessionSwitcher()
     interrupt_handler = InterruptHandler(display_ctrl)
+    
+    # 初始化企业级会话管理系统 (v2.0)
+    try:
+        from wagent.session_manager import SessionManager, create_session_manager
+        enterprise_session_mgr = SessionManager(base_dir="sessions", auto_cleanup=True)
+    except ImportError:
+        enterprise_session_mgr = None
+    
+    # 处理 --session-list 参数（企业级会话列表）
+    if args.session_list and enterprise_session_mgr:
+        show_enterprise_session_list(enterprise_session_mgr)
+        return
     
     # 处理 --list 参数
     if args.list:

@@ -60,11 +60,18 @@ class UserConstraint:
     def __post_init__(self):
         if not self.created_at:
             self.created_at = datetime.now().isoformat()
+        
+        # 确保type是枚举对象（处理从JSON加载的情况）
+        if isinstance(self.type, str):
+            for ct in ConstraintType:
+                if ct.value == self.type:
+                    self.type = ct
+                    break
     
     def to_dict(self) -> Dict:
         return {
             'constraint_id': self.constraint_id,
-            'type': self.type.value,
+            'type': self.type.value if hasattr(self.type, 'value') else self.type,
             'description': self.description,
             'value': self.value,
             'is_mandatory': self.is_mandatory,
@@ -89,12 +96,19 @@ class AuditRecord:
     def __post_init__(self):
         if not self.timestamp:
             self.timestamp = datetime.now().isoformat()
+        
+        # 确保action是枚举对象（处理从JSON加载的情况）
+        if isinstance(self.action, str):
+            for aa in AuditAction:
+                if aa.value == self.action:
+                    self.action = aa
+                    break
     
     def to_dict(self) -> Dict:
         return {
             'record_id': self.record_id,
             'timestamp': self.timestamp,
-            'action': self.action.value,
+            'action': self.action.value if hasattr(self.action, 'value') else self.action,
             'target_type': self.target_type,
             'target_id': self.target_id,
             'user_input': self.user_input,
@@ -121,6 +135,26 @@ class ConstraintViolation:
     def __post_init__(self):
         if not self.timestamp:
             self.timestamp = datetime.now().isoformat()
+        
+        # 确保constraint_type是枚举对象（处理从JSON加载的情况）
+        if isinstance(self.constraint_type, str):
+            for ct in ConstraintType:
+                if ct.value == self.constraint_type:
+                    self.constraint_type = ct
+                    break
+    
+    def to_dict(self) -> Dict:
+        return {
+            'violation_id': self.violation_id,
+            'constraint_type': self.constraint_type.value if hasattr(self.constraint_type, 'value') else self.constraint_type,
+            'constraint_description': self.constraint_description,
+            'actual_value': self.actual_value,
+            'expected_value': self.expected_value,
+            'severity': self.severity,
+            'context': self.context,
+            'is_resolved': self.is_resolved,
+            'timestamp': self.timestamp
+        }
 
 
 @dataclass
