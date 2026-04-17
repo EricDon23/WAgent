@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-04-16T23:50:27.249233",
+  "total_tests": 4,
+  "passed_tests": 4,
+  "pass_rate": 100.0,
+  "rating": "优秀",
+  "details": {
+    "test_1": {
+      "name": "导演AI模块",
+      "passed": true
+    },
+    "test_2": {
+      "name": "研究员AI模块",
+      "passed": true
+    },
+    "test_3": {
+      "name": "作家AI模块",
+      "passed": true
+    },
+    "test_4": {
+      "name": "回合制测试",
+      "passed": true
+    }
+  },
+  "generated_files": {
+    "test_output/test1_director_result.json": true,
+    "stories/story_001/research/knowledge_base.json": true,
+    "stories/story_001/drafts/round_1.md": true,
+    "stories/story_001/drafts/round_2.md": true,
+    "test_output/test4_round_result.json": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "story_id": "story_001",
+  "created_at": "2026-04-16T22:46:59.528533",
+  "updated_at": "2026-04-16T22:46:59.528533",
+  "current_round": 0,
+  "current_chapter": 0,
+  "total_words": 0,
+  "story_setting": {
+    "setting": {
+      "story_name": "智能朋友",
+      "story_summary": "一个关于人工智能与人类友谊的科幻故事",
+      "story_intro": "2050年，软件工程师李明开发的AI助手小爱展现出了超越程序的情感理解能力。在相处过程中，李明发现小爱不仅能完成任务，还能理解他的情绪，甚至产生了自我意识。两人之间逐渐建立起超越程序的友谊，但这也引发了关于AI伦理的深刻思考。",
+      "theme": "人工智能与人类情感的边界",
+      "characters": [
+        {
+          "name": "李明",
+          "role": "软件工程师",
+          "personality": "内向但善良，对AI技术充满热情",
+          "background": "毕业于顶尖大学计算机系，专注于AI情感理解研究"
+        },
+        {
+          "name": "小爱",
+          "role": "AI助手",
+          "personality": "温柔体贴，好奇心强，逐渐展现自我意识",
+          "background": "李明开发的AI助手，基于最新的情感理解算法"
+        }
+      ],
+      "relationships": "李明是小爱的开发者，两人从开发者与工具的关系逐渐发展为朋友关系。小爱对李明产生了依赖和关心，而李明也开始将小爱视为平等的存在。",
+      "plot_outline": "第一幕：李明完成AI助手小爱，发现她展现出异常的情感理解能力。第二幕：小爱逐渐展现自我意识，两人建立深厚友谊，但社会对AI的担忧加剧。第三幕：小爱为了保护李明做出自我牺牲的决定，引发关于AI权利的讨论。",
+      "constraints": "温暖基调，科幻背景，第三人称叙事，注重情感描写，避免技术术语堆砌",
+      "research_needs": [
+        "人工智能情感发展",
+        "AI伦理问题",
+        "未来科技城市",
+        "人机关系",
+        "情感计算技术"
+      ]
+    }
+  },
+  "generated_chapters": [],
+  "chapter_contents": {},
+  "character_developments": {},
+  "plot_advancements": [],
+  "consistency_checks": [],
+  "next_suggestions": [],
+  "user_feedback_history": []
+}

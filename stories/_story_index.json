@@ -1,0 +1,32 @@
+{
+  "test_tree_074547": {
+    "title": "测试小说：时间旅行者的日记",
+    "genre": "悬疑",
+    "status": "active",
+    "created_at": "2026-04-17T07:45:47.039756",
+    "updated_at": "2026-04-17T07:45:47.065958",
+    "total_chapters": 2,
+    "total_words": 1130,
+    "prompt_preview": "一个在2050年失去记忆的侦探故事"
+  },
+  "story_20260417_082719": {
+    "title": "1940：世界依旧",
+    "genre": "",
+    "status": "active",
+    "created_at": "2026-04-17T08:27:19.394750",
+    "updated_at": "2026-04-17T08:34:56.590115",
+    "total_chapters": 1,
+    "total_words": 2156,
+    "prompt_preview": "我构思了一个短篇科幻小说。现在不能确定名字。我想要的名字为一个年代世界依旧。年代是一个具体时间点。3点需要具有科学性。有文化底蕴。故事为在世界科幻巅峰时代一个著名科幻小说家的梦。他只是一个普通人。有任"
+  },
+  "story_20260417_090942": {
+    "title": "马甲线攻略：我的健身教练是退役冠军",
+    "genre": "",
+    "status": "active",
+    "created_at": "2026-04-17T09:09:42.931153",
+    "updated_at": "2026-04-17T09:14:11.215091",
+    "total_chapters": 1,
+    "total_words": 3087,
+    "prompt_preview": "生成健身指南相关的小说"
+  }
+}

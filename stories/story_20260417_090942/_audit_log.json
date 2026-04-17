@@ -1,0 +1,66 @@
+{
+  "records": [
+    {
+      "record_id": "audit_1_091056853409",
+      "timestamp": "2026-04-17T09:10:56.853409",
+      "action": "创建",
+      "target_type": "snapshot",
+      "target_id": "snap_1_091056",
+      "user_input": "",
+      "before_state": {},
+      "after_state": {},
+      "details": "创建快照: 初始故事设定",
+      "is_rollback": false
+    },
+    {
+      "record_id": "audit_2_091143884718",
+      "timestamp": "2026-04-17T09:11:43.884718",
+      "action": "确认",
+      "target_type": "setting",
+      "target_id": "story_20260417_090942",
+      "user_input": "",
+      "before_state": {},
+      "after_state": {},
+      "details": "用户确认故事设定",
+      "is_rollback": false
+    },
+    {
+      "record_id": "audit_3_091210244493",
+      "timestamp": "2026-04-17T09:12:10.244493",
+      "action": "创建",
+      "target_type": "snapshot",
+      "target_id": "snap_2_091210",
+      "user_input": "",
+      "before_state": {},
+      "after_state": {},
+      "details": "创建快照: 研究资料",
+      "is_rollback": false
+    },
+    {
+      "record_id": "audit_4_091411206502",
+      "timestamp": "2026-04-17T09:14:11.206502",
+      "action": "确认",
+      "target_type": "chapter",
+      "target_id": "chapter_1",
+      "user_input": "",
+      "before_state": {},
+      "after_state": {},
+      "details": "用户确认第1章",
+      "is_rollback": false
+    },
+    {
+      "record_id": "audit_5_091411210529",
+      "timestamp": "2026-04-17T09:14:11.210529",
+      "action": "创建",
+      "target_type": "snapshot",
+      "target_id": "snap_3_091411",
+      "user_input": "",
+      "before_state": {},
+      "after_state": {},
+      "details": "创建快照: 第1章最终版",
+      "is_rollback": false
+    }
+  ],
+  "total_records": 5,
+  "last_updated": "2026-04-17T09:14:11.213061"
+}

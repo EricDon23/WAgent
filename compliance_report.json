@@ -1,0 +1,863 @@
+{
+  "timestamp": "2026-04-17T07:35:46.788169",
+  "summary": {
+    "total_checks": 86,
+    "passed": 76,
+    "failed": 9,
+    "warnings": 1,
+    "skipped": 0,
+    "errors": 0,
+    "score": 88.4,
+    "grade": "B"
+  },
+  "categories": {
+    "项目结构": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "AI处理层": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "工具层": {
+      "pass": 4,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "数据层": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "测试套件": {
+      "pass": 4,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "输出目录": {
+      "pass": 2,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "WAgent核心": {
+      "pass": 7,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "WAgent引擎": {
+      "pass": 4,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "WAgent工具": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "v5.0特性": {
+      "pass": 4,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "v5.0状态": {
+      "pass": 1,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "导演AI": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "研究员AI": {
+      "pass": 2,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "作家AI": {
+      "pass": 3,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "参数兼容": {
+      "pass": 2,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "Y/N机制": {
+      "pass": 4,
+      "fail": 1,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "自动保存": {
+      "pass": 7,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "上下文系统": {
+      "pass": 8,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "核心测试": {
+      "pass": 5,
+      "fail": 0,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    },
+    "依赖包": {
+      "pass": 4,
+      "fail": 0,
+      "warning": 1,
+      "skip": 0,
+      "error": 0
+    },
+    "功能完整性": {
+      "pass": 0,
+      "fail": 8,
+      "warning": 0,
+      "skip": 0,
+      "error": 0
+    }
+  },
+  "details": [
+    {
+      "category": "项目结构",
+      "item": "根目录文件: .env",
+      "status": "PASS",
+      "details": "存在 (1,055 bytes)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "项目结构",
+      "item": "根目录文件: requirements.txt",
+      "status": "PASS",
+      "details": "存在 (838 bytes)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "项目结构",
+      "item": "根目录文件: main.py",
+      "status": "PASS",
+      "details": "存在 (11,378 bytes)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "AI处理层",
+      "item": "AI模块: ai/director_ai.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "AI处理层",
+      "item": "AI模块: ai/researcher_ai.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "AI处理层",
+      "item": "AI模块: ai/writer_ai.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "工具层",
+      "item": "工具: baidu_search_server.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "工具层",
+      "item": "工具: io_tool.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "工具层",
+      "item": "工具: ai_self_constraint.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "工具层",
+      "item": "工具: text_processor.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "数据层",
+      "item": "数据模块: g_module.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "数据层",
+      "item": "数据模块: novel_data.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "数据层",
+      "item": "数据模块: redis_config.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "测试套件",
+      "item": "测试: test_director.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "测试套件",
+      "item": "测试: test_researcher.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "测试套件",
+      "item": "测试: test_writer.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "测试套件",
+      "item": "测试: test_round.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "输出目录",
+      "item": "目录: stories//",
+      "status": "PASS",
+      "details": "存在 (2 个子项)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "输出目录",
+      "item": "目录: logs//",
+      "status": "PASS",
+      "details": "存在 (8 个子项)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: __init__.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: config.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: controller.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: normalizer.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: display.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: logger.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent核心",
+      "item": "核心: cache.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent引擎",
+      "item": "引擎: __init__.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent引擎",
+      "item": "引擎: director.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent引擎",
+      "item": "引擎: researcher.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent引擎",
+      "item": "引擎: writer.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent工具",
+      "item": "工具: __init__.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent工具",
+      "item": "工具: interactive.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "WAgent工具",
+      "item": "工具: archiver.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "v5.0特性",
+      "item": "新功能: context.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "v5.0特性",
+      "item": "新功能: continuity.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "v5.0特性",
+      "item": "新功能: dynamic_strategy.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "v5.0特性",
+      "item": "新功能: context_writer.py",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "v5.0状态",
+      "item": "上下文感知系统",
+      "status": "PASS",
+      "details": "4/4 功能已安装",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "导演AI",
+      "item": "导入测试",
+      "status": "PASS",
+      "details": "成功导入 DirectorAI",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "导演AI",
+      "item": "方法: generate()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "导演AI",
+      "item": "方法: refine()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "研究员AI",
+      "item": "导入测试",
+      "status": "PASS",
+      "details": "成功导入 ResearcherAI",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "研究员AI",
+      "item": "方法: generate()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "作家AI",
+      "item": "导入测试",
+      "status": "PASS",
+      "details": "成功导入 WriterAI",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "作家AI",
+      "item": "方法: generate()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "作家AI",
+      "item": "方法: modify()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "参数兼容",
+      "item": "ResearcherAI.generate(needs=)",
+      "status": "PASS",
+      "details": "正确",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "参数兼容",
+      "item": "WriterAI.generate(kb=)",
+      "status": "PASS",
+      "details": "正确",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "Y/N机制",
+      "item": "模块导入",
+      "status": "PASS",
+      "details": "InteractivePrompt 可用",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "Y/N机制",
+      "item": "confirm()方法",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "Y/N机制",
+      "item": "解析逻辑",
+      "status": "PASS",
+      "details": "_parse_yes_no 存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "Y/N机制",
+      "item": "正则模式",
+      "status": "PASS",
+      "details": "大小写不敏感模式已配置",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "Y/N机制",
+      "item": "模块导入",
+      "status": "FAIL",
+      "details": "错误: cannot import name 'StringIO' from 'unittest.mock' (D:\\anaconda3\\Lib\\unittest\\mock.py)",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "方法: _save_info_document()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "方法: _save_novel_chapter()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "方法: _save_full_novel()",
+      "status": "PASS",
+      "details": "存在",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "信息文档目录",
+      "status": "PASS",
+      "details": "2 个文件",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "文档: 01_story_setting.json",
+      "status": "PASS",
+      "details": "909 bytes",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "文档: 02_knowledge_base.json",
+      "status": "PASS",
+      "details": "2,912 bytes",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "自动保存",
+      "item": "小说文档目录",
+      "status": "PASS",
+      "details": "0 个文件",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "ContextMemory",
+      "status": "PASS",
+      "details": "可用 (10 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "StoryContext",
+      "status": "PASS",
+      "details": "可用 (6 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "ChapterContext",
+      "status": "PASS",
+      "details": "可用 (6 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "StyleProfile",
+      "status": "PASS",
+      "details": "可用 (7 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "ContinuityManager",
+      "status": "PASS",
+      "details": "可用 (4 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "DynamicStrategyManager",
+      "status": "PASS",
+      "details": "可用 (5 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "ContextAwareWriter",
+      "status": "PASS",
+      "details": "可用 (6 方法)",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "上下文系统",
+      "item": "整体状态",
+      "status": "PASS",
+      "details": "7/7 组件就绪",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "核心测试",
+      "item": "测试1: 导演模块",
+      "status": "PASS",
+      "details": "可执行",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "核心测试",
+      "item": "测试2: 研究模块",
+      "status": "PASS",
+      "details": "可执行",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "核心测试",
+      "item": "测试3: 结果测试",
+      "status": "PASS",
+      "details": "可执行",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "核心测试",
+      "item": "测试4: 回合测试",
+      "status": "PASS",
+      "details": "可执行",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "核心测试",
+      "item": "测试套件完整性",
+      "status": "PASS",
+      "details": "4/4 全部就绪",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "依赖包",
+      "item": "langchain==1.2.15",
+      "status": "WARNING",
+      "details": "要求 0.2.17",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "依赖包",
+      "item": "pydantic==2.10.3",
+      "status": "PASS",
+      "details": "符合要求",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "依赖包",
+      "item": "aiohttp==3.11.10",
+      "status": "PASS",
+      "details": "已安装",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "依赖包",
+      "item": "tqdm==4.67.1",
+      "status": "PASS",
+      "details": "已安装",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "依赖包",
+      "item": "rich==未知",
+      "status": "PASS",
+      "details": "已安装",
+      "severity": "normal",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "主程序入口",
+      "status": "FAIL",
+      "details": "main函数 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "控制器初始化",
+      "status": "FAIL",
+      "details": "异步初始化 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "导演阶段",
+      "status": "FAIL",
+      "details": "导演+研究员流程 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "写作阶段",
+      "status": "FAIL",
+      "details": "章节生成 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "打包阶段",
+      "status": "FAIL",
+      "details": "ZIP归档 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "Y/N确认",
+      "status": "FAIL",
+      "details": "交互式判断 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "自动保存",
+      "status": "FAIL",
+      "details": "信息文档保存 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    },
+    {
+      "category": "功能完整性",
+      "item": "章节保存",
+      "status": "FAIL",
+      "details": "小说章节保存 ✗ 已退化或移除！",
+      "severity": "critical",
+      "suggestion": ""
+    }
+  ],
+  "critical_issues": [
+    "CheckResult(category='Y/N机制', item='模块导入', status='FAIL', details=\"错误: cannot import name 'StringIO' from 'unittest.mock' (D:\\\\anaconda3\\\\Lib\\\\unittest\\\\mock.py)\", severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='主程序入口', status='FAIL', details='main函数 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='控制器初始化', status='FAIL', details='异步初始化 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='导演阶段', status='FAIL', details='导演+研究员流程 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='写作阶段', status='FAIL', details='章节生成 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='打包阶段', status='FAIL', details='ZIP归档 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='Y/N确认', status='FAIL', details='交互式判断 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='自动保存', status='FAIL', details='信息文档保存 ✗ 已退化或移除！', severity='critical', suggestion='')",
+    "CheckResult(category='功能完整性', item='章节保存', status='FAIL', details='小说章节保存 ✗ 已退化或移除！', severity='critical', suggestion='')"
+  ]
+}
