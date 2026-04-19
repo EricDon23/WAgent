@@ -1,59 +1,35 @@
 {
-  "sess_20260417_115021": {
-    "instance_id": "agent_503f2d1706db",
-    "session_id": "sess_20260417_115021",
-    "state": "running",
-    "created_at": "2026-04-17T11:50:47.418216",
-    "last_active_at": "2026-04-17T12:26:51.663030",
-    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_113208",
-    "current_chapter": 5,
-    "total_words_generated": 0,
-    "memory_usage_mb": 0.0,
-    "config": {
-      "session_id": "sess_20260417_115021",
-      "story_id": "",
-      "agent_type": "wagent",
-      "max_memory_mb": 512,
-      "auto_save_interval": 300,
-      "isolation_level": "strict"
+  "sessions": {
+    "session_0003": {
+      "session_id": "session_0003",
+      "story_id": "story_20260418_192949",
+      "story_name": "《远帆航队秘境探险录·第二章：墟谷残声》",
+      "created_at": "2026-04-18T19:29:49.485004",
+      "updated_at": "2026-04-19T15:01:04.842835",
+      "chapter_count": 2,
+      "total_words": 11077,
+      "status": "active"
+    },
+    "session_0004": {
+      "session_id": "session_0004",
+      "story_id": "story_20260419_164634",
+      "story_name": "测试故事A-科幻冒险",
+      "created_at": "2026-04-19T16:46:34.209536",
+      "updated_at": "2026-04-19T17:00:05.401019",
+      "chapter_count": 3,
+      "total_words": 18959,
+      "status": "active"
+    },
+    "session_0006": {
+      "session_id": "session_0006",
+      "story_id": "story_20260419_170005",
+      "story_name": "《远星信使：星界半人马领残响》（第一部分）",
+      "created_at": "2026-04-19T17:00:05.413427",
+      "updated_at": "2026-04-19T18:42:21.639358",
+      "chapter_count": 3,
+      "total_words": 17985,
+      "status": "active"
     }
   },
-  "asdasd": {
-    "instance_id": "agent_5e4af20de22b",
-    "session_id": "asdasd",
-    "state": "running",
-    "created_at": "2026-04-17T11:58:38.339744",
-    "last_active_at": "2026-04-17T11:58:42.706407",
-    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_090942",
-    "current_chapter": 0,
-    "total_words_generated": 0,
-    "memory_usage_mb": 0.0,
-    "config": {
-      "session_id": "asdasd",
-      "story_id": "",
-      "agent_type": "wagent",
-      "max_memory_mb": 512,
-      "auto_save_interval": 300,
-      "isolation_level": "strict"
-    }
-  },
-  "123": {
-    "instance_id": "agent_d4b93e8240be",
-    "session_id": "123",
-    "state": "running",
-    "created_at": "2026-04-17T12:09:36.976690",
-    "last_active_at": "2026-04-17T12:09:40.069605",
-    "bound_story_path": "C:\\Users\\dgh\\Desktop\\ai实训\\WAgent\\stories\\story_20260417_090942",
-    "current_chapter": 0,
-    "total_words_generated": 0,
-    "memory_usage_mb": 0.0,
-    "config": {
-      "session_id": "123",
-      "story_id": "",
-      "agent_type": "wagent",
-      "max_memory_mb": 512,
-      "auto_save_interval": 300,
-      "isolation_level": "strict"
-    }
-  }
+  "next_id": 7
 }

@@ -45,11 +45,6 @@ env/
 logs/*.log
 *.log
 
-# Data files
-data/*.json
-data/*.db
-data/*.sqlite3
-
 # OS
 .DS_Store
 Thumbs.db
@@ -61,6 +56,14 @@ htmlcov/
 .tox/
 .nox/
 
-# Distribution
-*.tar.gz
-*.zip
+# Generated stories (keep structure, ignore content)
+stories/
+
+# Backups
+backups/
+
+# Memory files
+memory/
+
+# Exports
+exports/
